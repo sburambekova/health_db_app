@@ -21,7 +21,7 @@ Session = scoped_session(sessionmaker(bind=engine))
 session = Session()
 
 
-Users = metadata.tables['users']
+Users = metadata.tables['Users']
 
 @app.route('/')
 def index():
