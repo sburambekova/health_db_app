@@ -2,16 +2,20 @@ from flask import Flask, render_template, request, redirect, url_for
 from sqlalchemy import create_engine, MetaData, text
 from sqlalchemy.orm import scoped_session, sessionmaker
 
+import sqlalchemy
+print("SQLAlchemy version:", sqlalchemy.__version__)
 
 app = Flask(__name__)
 DATABASE_URL = "postgresql://postgres:yourpassword@localhost:5432/health_reporting_db"
 
 engine = create_engine(DATABASE_URL)
-metadata = MetaData(bind=engine)
+metadata = MetaData()
+
+
 Session = scoped_session(sessionmaker(bind=engine))
 session = Session()
 
-metadata.reflect()
+metadata.reflect(bind=engine)
 Users = metadata.tables['users']
 
 @app.route('/')
