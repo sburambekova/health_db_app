@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Users</title>
+    <title>Health Reporting System</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+    <h1>All Users</h1>
+    <table border="1">
+        <tr>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Salary</th>
+            <th>Country</th>
+            <th>Actions</th>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.email }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
+            <td>{{ user.salary }}</td>
+            <td>{{ user.cname }}</td>
+            <td>
+                <a href="/edit/{{ user.email }}">Edit</a> |
+                <a href="/delete/{{ user.email }}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
