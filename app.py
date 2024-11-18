@@ -6,9 +6,12 @@ import sqlalchemy
 print("SQLAlchemy version:", sqlalchemy.__version__)
 
 app = Flask(__name__)
-DATABASE_URL = "postgresql://postgres:yourpassword@localhost:5432/health_reporting_db"
+DATABASE_URL = "postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a/health_reporting_db"
 
-engine = create_engine(DATABASE_URL)
+import os
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
 metadata = MetaData()
 
 
