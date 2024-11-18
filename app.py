@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a/health_reporting_db"
+    "postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a.oregon-postgres.render.com/health_reporting_db"
 )
 
 engine = create_engine(DATABASE_URL)
