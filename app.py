@@ -7,7 +7,7 @@ app = Flask(__name__)
 DATABASE_URL = "postgresql://postgres:yourpassword@localhost:5432/health_reporting_db"
 
 engine = create_engine(DATABASE_URL)
-metadata = MetaData(bind=engine)
+metadata = MetaData()
 Session = scoped_session(sessionmaker(bind=engine))
 session = Session()
 
