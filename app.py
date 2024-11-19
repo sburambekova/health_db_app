@@ -6,13 +6,23 @@ import os
 
 
 app = Flask(__name__)
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a.oregon-postgres.render.com/health_reporting_db?sslmode=require'
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a.oregon-postgres.render.com/health_reporting_db"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+
+# app.config["SQLALCHEMY_DATABASE_URL"] = os.environ.get("DATABASE_URL")
+# DATABASE_URL = os.getenv(
+#     "DATABASE_URL",
+#     "postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a.oregon-postgres.render.com/health_reporting_db?sslmode=require"
+# )
+
+#postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a.oregon-postgres.render.com/health_reporting_db
+
+engine = create_engine(
+    DATABASE_URL,
+    connect_args={"sslmode": "require"}
 )
-
-engine = create_engine(DATABASE_URL)
 
 metadata = MetaData()
 metadata.reflect(bind=engine)
@@ -21,7 +31,7 @@ Session = scoped_session(sessionmaker(bind=engine))
 session = Session()
 
 
-Users = metadata.tables['Users']
+Users = metadata.tables['users']
 
 @app.route('/')
 def index():
@@ -78,5 +88,5 @@ def delete_user(email):
     return render_template('delete.html', email=email)
 
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run()
