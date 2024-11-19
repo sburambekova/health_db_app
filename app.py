@@ -105,12 +105,12 @@ app = Flask(__name__)
 
 # Ensure you have the DATABASE_URL set in your environment
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-    'postgresql://health_reporting_db_1_user:vqZqfsAZOeAYQ1ysiDfDZdm5p2vsgGhk@dpg-csua20btq21c73e4pukg-a.oregon-postgres.render.com:5432/health_reporting_db_1?sslmode=require'
+    'postgresql://health_reporting_db_1_user:vqZqfsAZOeAYQ1ysiDfDZdm5p2vsgGhk@dpg-csua20btq21c73e4pukg-a.oregon-postgres.render.com:5432/health_reporting_db_1?ssl=required'
 )
 #postgresql://health_reporting_db_1_user:vqZqfsAZOeAYQ1ysiDfDZdm5p2vsgGhk@dpg-csua20btq21c73e4pukg-a.oregon-postgres.render.com/health_reporting_db_1
 
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Get the DATABASE_URL from environment variables
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Get the DATABASE_URL from environment variables
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable Flask-SQLAlchemy's modification tracking
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Make sure you have a secret key set
 
@@ -192,4 +192,4 @@ def delete_user(email):
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()
