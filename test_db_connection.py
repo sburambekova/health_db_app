@@ -1,13 +1,13 @@
 import psycopg2
-from psycopg2 import OperationalError
+import os
 
-connection_string = "postgresql://health_reporting_db_user:dgh22mH4EbUWMEjwxWbCN7woDHywIuIo@dpg-cstnvd5umphs73frp4e0-a.oregon-postgres.render.com/health_reporting_db?sslmode=require"
+# Get the DATABASE_URL from environment variables
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 try:
-    conn = psycopg2.connect(connection_string)
+    # Attempt to connect to the database
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     print("Connection successful!")
-except OperationalError as e:
+    conn.close()  # Close the connection
+except Exception as e:
     print(f"Error: {e}")
-finally:
-    if conn:
-        conn.close()

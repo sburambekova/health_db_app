@@ -96,20 +96,24 @@
 
 # if __name__ == "__main__":
 #     app.run()
+import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
-import os
 
 # Initialize Flask app
 app = Flask(__name__)
 
-# Set up the database URI
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+# Ensure you have the DATABASE_URL set in your environment
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Get the DATABASE_URL from environment variables
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable Flask-SQLAlchemy's modification tracking
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Make sure you have a secret key set
 
 # Initialize SQLAlchemy ORM
 db = SQLAlchemy(app)
+
+#psql "postgresql://postgres:yourpassword@localhost:5432/health_reporting_db"
+
 
 # Define your Users model using Flask-SQLAlchemy
 class User(db.Model):
@@ -183,4 +187,4 @@ def delete_user(email):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)
