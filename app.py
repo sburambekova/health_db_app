@@ -104,8 +104,9 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # Ensure you have the DATABASE_URL set in your environment
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:yourpassword@localhost:5432/health_reporting_db"
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Get the DATABASE_URL from environment variables
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')  # Get the DATABASE_URL from environment variables
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # Disable Flask-SQLAlchemy's modification tracking
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')  # Make sure you have a secret key set
 
